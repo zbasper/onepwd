@@ -10,7 +10,7 @@ onepwd
 --------
 windows
 ^^^^^^^
-1. 下载源代码
+1. 下载源代码，确保系统中已安装有python3环境，可查看 `python在windows中的安装过程 <https://docs.python.org/3/using/windows.html>`_ 。
 2. 在源程序目录下运行安装脚本 ::
 
     > python3 setup.py
@@ -19,8 +19,8 @@ windows
 
 mac
 ^^^^^
-1. 下载源代码
-2. 如果指定的pip源不是pypi.python.org，在~.pip/pip.conf中增加一行 ::
+1. 下载源代码，确保系统中已安装有python3环境，可查看 `python在mac中的安装过程 <https://docs.python.org/3/using/mac.html>`_ 。
+2. 如果指定的pip源不是pypi.python.org，在~.pip/pip.conf中增加一行，将<>中的内容替换为实际镜像地址并去掉尖括号 ::
 
     [install]
     trusted-host=<mirror.xx.com/simple-源镜像地址>
