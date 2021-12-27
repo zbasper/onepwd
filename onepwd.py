@@ -34,9 +34,13 @@ from base64 import b64encode, b64decode
 import binascii
 import os
 import platform
+import shutil
+import atexit
 
 
 CRYPT_BITS = 16
+CRYPT_FILE = "crypher.db"
+CRYPT_FILE_BACK = "crypher-Copy.db"
 
 
 class OnePwd:
@@ -56,13 +60,14 @@ class OnePwd:
         # 加载主窗口
         root_menu = Menu(self.root)
         self.root['menu'] = root_menu
+        atexit.register(self.save_data)
 
     @staticmethod
     def init_table():
         if not os.path.exists("./data"):
             os.mkdir("./data")
 
-        conn = sqlite3.connect("./data/crypher.db")
+        conn = sqlite3.connect("./data/"+CRYPT_FILE)
         cur = conn.cursor()
         sql_is_table_exist = "select count(*) from sqlite_master where type='table' and name='account_info'"
         is_table_exist = cur.execute(sql_is_table_exist).fetchone()[0]
@@ -78,8 +83,13 @@ class OnePwd:
         return conn
 
     def __del__(self):
+
         if self.conn:
             self.conn.close()
+
+    @staticmethod
+    def save_data():
+        shutil.copyfile("./data/" + CRYPT_FILE, "./data/" + CRYPT_FILE_BACK)
 
 
 class AddFrame:
