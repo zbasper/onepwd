@@ -6,6 +6,10 @@ onepwd
 * 使用python3.10开发运行，在windows10和mac os 12系统上测试通过
 * 使用AES加解密
 
+.. image:: https://github.com/zbasper/onepwd/blob/main/img/main.JPG
+
+.. image:: https://github.com/zbasper/onepwd/blob/main/img/add.JPG
+
 安装说明
 --------
 windows
