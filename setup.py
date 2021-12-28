@@ -18,8 +18,10 @@ with open("require.txt", "r") as f:
 if platform.system() == 'Windows':
     with open("onepwd.vbs", "w") as f:
         f.write('set ws=WScript.CreateObject("WScript.Shell")\n')
-        f.write('ws.Run "{} {}", 0'.format(sys.executable, os.getcwd()+'\\'+'onepwd.py'))
+        f.write('ws.Run "{} {}", 0'.format(sys.executable, os.path.join(os.getcwd(), 'onepwd.py')))
 elif platform.system() == 'Darwin':
     with open("onepwd.sh", "w") as f:
         f.write('#!/usr/bin/env sh\n')
-        f.write('{} {}'.format(sys.executable, os.getcwd()+'/'+'onepwd.sh'))
+        f.write('{} {}'.format(sys.executable, os.path.join(os.getcwd(), 'onepwd.py')))
+
+    os.chmod("onepwd.sh", 0o755)
