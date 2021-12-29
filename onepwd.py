@@ -36,11 +36,13 @@ import os
 import platform
 import shutil
 import atexit
+import sys
 
 
 CRYPT_BITS = 16
-CRYPT_FILE = "crypher.db"
-CRYPT_FILE_BACK = "crypher-Copy.db"
+CUR_DATA_DIR = os.path.join(os.path.dirname(sys.argv[0]), "data")
+CRYPT_FILE = os.path.join(CUR_DATA_DIR, "crypher.db")
+CRYPT_FILE_BACK = os.path.join(CUR_DATA_DIR, "crypher-Copy.db")
 
 
 class OnePwd:
@@ -64,10 +66,10 @@ class OnePwd:
 
     @staticmethod
     def init_table():
-        if not os.path.exists("./data"):
-            os.mkdir("./data")
+        if not os.path.exists(CUR_DATA_DIR):
+            os.mkdir(CUR_DATA_DIR)
 
-        conn = sqlite3.connect("./data/"+CRYPT_FILE)
+        conn = sqlite3.connect(os.path.join(CUR_DATA_DIR, CRYPT_FILE))
         cur = conn.cursor()
         sql_is_table_exist = "select count(*) from sqlite_master where type='table' and name='account_info'"
         is_table_exist = cur.execute(sql_is_table_exist).fetchone()[0]
@@ -89,7 +91,7 @@ class OnePwd:
 
     @staticmethod
     def save_data():
-        shutil.copyfile("./data/" + CRYPT_FILE, "./data/" + CRYPT_FILE_BACK)
+        shutil.copyfile(CRYPT_FILE, CRYPT_FILE_BACK)
 
 
 class AddFrame:
